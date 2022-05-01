@@ -37,29 +37,19 @@ def db() -> DatabaseAdapter:
 
 @app.route("/")
 def index():
-    return render_template("create.html", form=OrderForm())
+    return render_template("/create.html", form=OrderForm())
 
 
 @app.route("/create", methods=['POST'])
 def create_order():
     form = OrderForm()
     if form.validate():
-        order = Order(form.name.data, form.address.data)
+        order = Order(None, form.name.data, form.address.data)
         db().create_order(order)
         return "<h1>Success</h1>"
     else:
         return "<h1>Failed</h1>"
 
-# Task:
-# implement based on hexagonal architecture
-# mamba + expects + mocks tests for the service
-# Reference:
-# https://medium.com/@vsavkin/hexagonal-architecture-for-rails-developers-8b1fee64a613
-# https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)
-# https://www.youtube.com/watch?v=tg5RFeSfBM4
-
-# https://github.com/mdspinc/appgrowth-py/wiki/_new?wiki%5Bname%5D=_Footer
-# Add a custom footer
 
 if __name__ == "__main__":
     app.run(debug=False)

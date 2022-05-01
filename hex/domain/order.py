@@ -7,8 +7,9 @@ from typing import Optional
 @dataclass_json
 @dataclass(frozen=True)
 class Order:
+    id: Optional[int]
     name: str
     address: str
     created_at: Optional[datetime] = datetime.utcnow()
     updated_at: Optional[datetime] = datetime.utcnow()
-    id: int = 0
+

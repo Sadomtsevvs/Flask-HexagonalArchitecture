@@ -2,7 +2,7 @@ from mamba import it, before, description
 from expects import equal, expect
 from unittest.mock import Mock, patch
 
-from hex.app import app
+from app import app
 
 
 class TestName:
@@ -15,8 +15,10 @@ class TestAddress:
 
 class MockOrderForm:
 
+    id = 0
     name = TestName()
     address = TestAddress()
+
 
     @staticmethod
     def validate():
@@ -40,8 +42,8 @@ with description('api') as self:
 
         mock_db = Mock()
         mock_db.create_order = None
-        with patch("hex.app.OrderForm", MockOrderForm):
-            with patch("hex.app.db", mock_db):
+        with patch("app.OrderForm", MockOrderForm):
+            with patch("app.db", mock_db):
                 response = self.client.post("/create")
 
         expect(response.status_code).to(equal(200))
