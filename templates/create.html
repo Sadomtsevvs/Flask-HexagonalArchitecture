@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <div class="form-wrapper">
+      <h2 class="title">Order</h2>
+        <form method="POST" action="/create">
+            {{ form.csrf_token }}
+            <fieldset class="form-field">
+                {{ form.name.label }}
+                {{ form.name() }}
+            </fieldset>
+             <fieldset class="form-field">
+                {{ form.address.label }}
+                {{ form.address() }}
+            </fieldset>
+            {{ form.submit(class="btn btn-primary")}}
+        </form>
+    </div>
+</body>
+</html>
